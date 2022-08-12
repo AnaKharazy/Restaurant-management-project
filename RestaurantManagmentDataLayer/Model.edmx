@@ -1,0 +1,705 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RestaurantManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tbl_Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CustomerLastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CustomerAddress" Type="nvarchar(max)" />
+          <Property Name="CustomerRegisterDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="CustomerPhoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="NationalId" Type="nvarchar" MaxLength="10" />
+          <Property Name="HomeAddress" Type="nvarchar" MaxLength="150" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="SexID" Type="int" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="IsAdmin" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_Factor">
+          <Key>
+            <PropertyRef Name="FactorID" />
+          </Key>
+          <Property Name="FactorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SumFactor" Type="nvarchar" MaxLength="50" />
+          <Property Name="Discount" Type="nvarchar" MaxLength="50" />
+          <Property Name="OrderDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmployeeID" Type="int" />
+          <Property Name="CustomerID" Type="int" />
+          <Property Name="tax" Type="nvarchar" MaxLength="50" />
+          <Property Name="OrderKindID" Type="int" />
+          <Property Name="PdfFileAddress" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tbl_Food">
+          <Key>
+            <PropertyRef Name="FoodID" />
+          </Key>
+          <Property Name="FoodID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FoodStatusID" Type="int" />
+          <Property Name="FoodTypeID" Type="int" />
+          <Property Name="FoodText" Type="nvarchar" MaxLength="50" />
+          <Property Name="Price" Type="nvarchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_FoodStatus">
+          <Key>
+            <PropertyRef Name="FoodStatusID" />
+          </Key>
+          <Property Name="FoodStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FoodStausText" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_FoodType">
+          <Key>
+            <PropertyRef Name="FoodTypeID" />
+          </Key>
+          <Property Name="FoodTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FoodTypeText" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FoodID" Type="int" />
+          <Property Name="NumberFoodOrder" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_OrderFactor">
+          <Key>
+            <PropertyRef Name="OrderFactorID" />
+          </Key>
+          <Property Name="OrderFactorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderID" Type="int" />
+          <Property Name="FactorID" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_OrderKind">
+          <Key>
+            <PropertyRef Name="OrderKindID" />
+          </Key>
+          <Property Name="OrderKindID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderKindText" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_SexType">
+          <Key>
+            <PropertyRef Name="SexID" />
+          </Key>
+          <Property Name="SexID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SexText" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK_tbl_Employee_tbl_SexType">
+          <End Role="tbl_SexType" Type="Self.tbl_SexType" Multiplicity="0..1" />
+          <End Role="tbl_Employee" Type="Self.tbl_Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_SexType">
+              <PropertyRef Name="SexID" />
+            </Principal>
+            <Dependent Role="tbl_Employee">
+              <PropertyRef Name="SexID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Factor_tbl_Customer">
+          <End Role="tbl_Customer" Type="Self.tbl_Customer" Multiplicity="0..1" />
+          <End Role="tbl_Factor" Type="Self.tbl_Factor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="tbl_Factor">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Factor_tbl_Employee">
+          <End Role="tbl_Employee" Type="Self.tbl_Employee" Multiplicity="0..1" />
+          <End Role="tbl_Factor" Type="Self.tbl_Factor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="tbl_Factor">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Factor_tbl_OrderKind">
+          <End Role="tbl_OrderKind" Type="Self.tbl_OrderKind" Multiplicity="0..1" />
+          <End Role="tbl_Factor" Type="Self.tbl_Factor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_OrderKind">
+              <PropertyRef Name="OrderKindID" />
+            </Principal>
+            <Dependent Role="tbl_Factor">
+              <PropertyRef Name="OrderKindID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Food_tbl_FoodStatus">
+          <End Role="tbl_FoodStatus" Type="Self.tbl_FoodStatus" Multiplicity="0..1" />
+          <End Role="tbl_Food" Type="Self.tbl_Food" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_FoodStatus">
+              <PropertyRef Name="FoodStatusID" />
+            </Principal>
+            <Dependent Role="tbl_Food">
+              <PropertyRef Name="FoodStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Food_tbl_FoodType">
+          <End Role="tbl_FoodType" Type="Self.tbl_FoodType" Multiplicity="0..1" />
+          <End Role="tbl_Food" Type="Self.tbl_Food" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_FoodType">
+              <PropertyRef Name="FoodTypeID" />
+            </Principal>
+            <Dependent Role="tbl_Food">
+              <PropertyRef Name="FoodTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Order_tbl_Food">
+          <End Role="tbl_Food" Type="Self.tbl_Food" Multiplicity="0..1" />
+          <End Role="tbl_Order" Type="Self.tbl_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Food">
+              <PropertyRef Name="FoodID" />
+            </Principal>
+            <Dependent Role="tbl_Order">
+              <PropertyRef Name="FoodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_OrderFactor_tbl_Factor">
+          <End Role="tbl_Factor" Type="Self.tbl_Factor" Multiplicity="0..1" />
+          <End Role="tbl_OrderFactor" Type="Self.tbl_OrderFactor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Factor">
+              <PropertyRef Name="FactorID" />
+            </Principal>
+            <Dependent Role="tbl_OrderFactor">
+              <PropertyRef Name="FactorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_OrderFactor_tbl_Order">
+          <End Role="tbl_Order" Type="Self.tbl_Order" Multiplicity="0..1" />
+          <End Role="tbl_OrderFactor" Type="Self.tbl_OrderFactor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Order">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="tbl_OrderFactor">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RestaurantManagementModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Customer" EntityType="Self.tbl_Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Employee" EntityType="Self.tbl_Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Factor" EntityType="Self.tbl_Factor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Food" EntityType="Self.tbl_Food" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_FoodStatus" EntityType="Self.tbl_FoodStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_FoodType" EntityType="Self.tbl_FoodType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Order" EntityType="Self.tbl_Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_OrderFactor" EntityType="Self.tbl_OrderFactor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_OrderKind" EntityType="Self.tbl_OrderKind" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_SexType" EntityType="Self.tbl_SexType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tbl_Employee_tbl_SexType" Association="Self.FK_tbl_Employee_tbl_SexType">
+            <End Role="tbl_SexType" EntitySet="tbl_SexType" />
+            <End Role="tbl_Employee" EntitySet="tbl_Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Factor_tbl_Customer" Association="Self.FK_tbl_Factor_tbl_Customer">
+            <End Role="tbl_Customer" EntitySet="tbl_Customer" />
+            <End Role="tbl_Factor" EntitySet="tbl_Factor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Factor_tbl_Employee" Association="Self.FK_tbl_Factor_tbl_Employee">
+            <End Role="tbl_Employee" EntitySet="tbl_Employee" />
+            <End Role="tbl_Factor" EntitySet="tbl_Factor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Factor_tbl_OrderKind" Association="Self.FK_tbl_Factor_tbl_OrderKind">
+            <End Role="tbl_OrderKind" EntitySet="tbl_OrderKind" />
+            <End Role="tbl_Factor" EntitySet="tbl_Factor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Food_tbl_FoodStatus" Association="Self.FK_tbl_Food_tbl_FoodStatus">
+            <End Role="tbl_FoodStatus" EntitySet="tbl_FoodStatus" />
+            <End Role="tbl_Food" EntitySet="tbl_Food" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Food_tbl_FoodType" Association="Self.FK_tbl_Food_tbl_FoodType">
+            <End Role="tbl_FoodType" EntitySet="tbl_FoodType" />
+            <End Role="tbl_Food" EntitySet="tbl_Food" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Order_tbl_Food" Association="Self.FK_tbl_Order_tbl_Food">
+            <End Role="tbl_Food" EntitySet="tbl_Food" />
+            <End Role="tbl_Order" EntitySet="tbl_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_OrderFactor_tbl_Factor" Association="Self.FK_tbl_OrderFactor_tbl_Factor">
+            <End Role="tbl_Factor" EntitySet="tbl_Factor" />
+            <End Role="tbl_OrderFactor" EntitySet="tbl_OrderFactor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_OrderFactor_tbl_Order" Association="Self.FK_tbl_OrderFactor_tbl_Order">
+            <End Role="tbl_Order" EntitySet="tbl_Order" />
+            <End Role="tbl_OrderFactor" EntitySet="tbl_OrderFactor" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RestaurantManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tbl_Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerRegisterDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerPhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_Factor" Relationship="Self.FK_tbl_Factor_tbl_Customer" FromRole="tbl_Customer" ToRole="tbl_Factor" />
+          <Property Name="Active" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tbl_Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NationalId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="HomeAddress" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SexID" Type="Int32" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_SexType" Relationship="Self.FK_tbl_Employee_tbl_SexType" FromRole="tbl_Employee" ToRole="tbl_SexType" />
+          <NavigationProperty Name="tbl_Factor" Relationship="Self.FK_tbl_Factor_tbl_Employee" FromRole="tbl_Employee" ToRole="tbl_Factor" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="IsAdmin" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tbl_Factor">
+          <Key>
+            <PropertyRef Name="FactorID" />
+          </Key>
+          <Property Name="FactorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SumFactor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Discount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OrderDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeID" Type="Int32" />
+          <Property Name="CustomerID" Type="Int32" />
+          <Property Name="tax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OrderKindID" Type="Int32" />
+          <NavigationProperty Name="tbl_Customer" Relationship="Self.FK_tbl_Factor_tbl_Customer" FromRole="tbl_Factor" ToRole="tbl_Customer" />
+          <NavigationProperty Name="tbl_Employee" Relationship="Self.FK_tbl_Factor_tbl_Employee" FromRole="tbl_Factor" ToRole="tbl_Employee" />
+          <NavigationProperty Name="tbl_OrderKind" Relationship="Self.FK_tbl_Factor_tbl_OrderKind" FromRole="tbl_Factor" ToRole="tbl_OrderKind" />
+          <NavigationProperty Name="tbl_OrderFactor" Relationship="Self.FK_tbl_OrderFactor_tbl_Factor" FromRole="tbl_Factor" ToRole="tbl_OrderFactor" />
+          <Property Name="PdfFileAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_Food">
+          <Key>
+            <PropertyRef Name="FoodID" />
+          </Key>
+          <Property Name="FoodID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FoodStatusID" Type="Int32" />
+          <Property Name="FoodTypeID" Type="Int32" />
+          <Property Name="FoodText" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_FoodStatus" Relationship="Self.FK_tbl_Food_tbl_FoodStatus" FromRole="tbl_Food" ToRole="tbl_FoodStatus" />
+          <NavigationProperty Name="tbl_FoodType" Relationship="Self.FK_tbl_Food_tbl_FoodType" FromRole="tbl_Food" ToRole="tbl_FoodType" />
+          <NavigationProperty Name="tbl_Order" Relationship="Self.FK_tbl_Order_tbl_Food" FromRole="tbl_Food" ToRole="tbl_Order" />
+          <Property Name="Active" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tbl_FoodStatus">
+          <Key>
+            <PropertyRef Name="FoodStatusID" />
+          </Key>
+          <Property Name="FoodStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FoodStausText" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_Food" Relationship="Self.FK_tbl_Food_tbl_FoodStatus" FromRole="tbl_FoodStatus" ToRole="tbl_Food" />
+        </EntityType>
+        <EntityType Name="tbl_FoodType">
+          <Key>
+            <PropertyRef Name="FoodTypeID" />
+          </Key>
+          <Property Name="FoodTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FoodTypeText" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_Food" Relationship="Self.FK_tbl_Food_tbl_FoodType" FromRole="tbl_FoodType" ToRole="tbl_Food" />
+        </EntityType>
+        <EntityType Name="tbl_Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FoodID" Type="Int32" />
+          <Property Name="NumberFoodOrder" Type="Int32" />
+          <NavigationProperty Name="tbl_Food" Relationship="Self.FK_tbl_Order_tbl_Food" FromRole="tbl_Order" ToRole="tbl_Food" />
+          <NavigationProperty Name="tbl_OrderFactor" Relationship="Self.FK_tbl_OrderFactor_tbl_Order" FromRole="tbl_Order" ToRole="tbl_OrderFactor" />
+        </EntityType>
+        <EntityType Name="tbl_OrderFactor">
+          <Key>
+            <PropertyRef Name="OrderFactorID" />
+          </Key>
+          <Property Name="OrderFactorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderID" Type="Int32" />
+          <Property Name="FactorID" Type="Int32" />
+          <NavigationProperty Name="tbl_Factor" Relationship="Self.FK_tbl_OrderFactor_tbl_Factor" FromRole="tbl_OrderFactor" ToRole="tbl_Factor" />
+          <NavigationProperty Name="tbl_Order" Relationship="Self.FK_tbl_OrderFactor_tbl_Order" FromRole="tbl_OrderFactor" ToRole="tbl_Order" />
+        </EntityType>
+        <EntityType Name="tbl_OrderKind">
+          <Key>
+            <PropertyRef Name="OrderKindID" />
+          </Key>
+          <Property Name="OrderKindID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderKindText" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_Factor" Relationship="Self.FK_tbl_Factor_tbl_OrderKind" FromRole="tbl_OrderKind" ToRole="tbl_Factor" />
+        </EntityType>
+        <EntityType Name="tbl_SexType">
+          <Key>
+            <PropertyRef Name="SexID" />
+          </Key>
+          <Property Name="SexID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SexText" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_Employee" Relationship="Self.FK_tbl_Employee_tbl_SexType" FromRole="tbl_SexType" ToRole="tbl_Employee" />
+        </EntityType>
+        <Association Name="FK_tbl_Factor_tbl_Customer">
+          <End Role="tbl_Customer" Type="Self.tbl_Customer" Multiplicity="0..1" />
+          <End Role="tbl_Factor" Type="Self.tbl_Factor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="tbl_Factor">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Employee_tbl_SexType">
+          <End Role="tbl_SexType" Type="Self.tbl_SexType" Multiplicity="0..1" />
+          <End Role="tbl_Employee" Type="Self.tbl_Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_SexType">
+              <PropertyRef Name="SexID" />
+            </Principal>
+            <Dependent Role="tbl_Employee">
+              <PropertyRef Name="SexID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Factor_tbl_Employee">
+          <End Role="tbl_Employee" Type="Self.tbl_Employee" Multiplicity="0..1" />
+          <End Role="tbl_Factor" Type="Self.tbl_Factor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="tbl_Factor">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Factor_tbl_OrderKind">
+          <End Role="tbl_OrderKind" Type="Self.tbl_OrderKind" Multiplicity="0..1" />
+          <End Role="tbl_Factor" Type="Self.tbl_Factor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_OrderKind">
+              <PropertyRef Name="OrderKindID" />
+            </Principal>
+            <Dependent Role="tbl_Factor">
+              <PropertyRef Name="OrderKindID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_OrderFactor_tbl_Factor">
+          <End Role="tbl_Factor" Type="Self.tbl_Factor" Multiplicity="0..1" />
+          <End Role="tbl_OrderFactor" Type="Self.tbl_OrderFactor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Factor">
+              <PropertyRef Name="FactorID" />
+            </Principal>
+            <Dependent Role="tbl_OrderFactor">
+              <PropertyRef Name="FactorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Food_tbl_FoodStatus">
+          <End Role="tbl_FoodStatus" Type="Self.tbl_FoodStatus" Multiplicity="0..1" />
+          <End Role="tbl_Food" Type="Self.tbl_Food" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_FoodStatus">
+              <PropertyRef Name="FoodStatusID" />
+            </Principal>
+            <Dependent Role="tbl_Food">
+              <PropertyRef Name="FoodStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Food_tbl_FoodType">
+          <End Role="tbl_FoodType" Type="Self.tbl_FoodType" Multiplicity="0..1" />
+          <End Role="tbl_Food" Type="Self.tbl_Food" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_FoodType">
+              <PropertyRef Name="FoodTypeID" />
+            </Principal>
+            <Dependent Role="tbl_Food">
+              <PropertyRef Name="FoodTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Order_tbl_Food">
+          <End Role="tbl_Food" Type="Self.tbl_Food" Multiplicity="0..1" />
+          <End Role="tbl_Order" Type="Self.tbl_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Food">
+              <PropertyRef Name="FoodID" />
+            </Principal>
+            <Dependent Role="tbl_Order">
+              <PropertyRef Name="FoodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_OrderFactor_tbl_Order">
+          <End Role="tbl_Order" Type="Self.tbl_Order" Multiplicity="0..1" />
+          <End Role="tbl_OrderFactor" Type="Self.tbl_OrderFactor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Order">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="tbl_OrderFactor">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RestaurantManagementEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="tbl_Customer" EntityType="Self.tbl_Customer" />
+          <EntitySet Name="tbl_Employee" EntityType="Self.tbl_Employee" />
+          <EntitySet Name="tbl_Factor" EntityType="Self.tbl_Factor" />
+          <EntitySet Name="tbl_Food" EntityType="Self.tbl_Food" />
+          <EntitySet Name="tbl_FoodStatus" EntityType="Self.tbl_FoodStatus" />
+          <EntitySet Name="tbl_FoodType" EntityType="Self.tbl_FoodType" />
+          <EntitySet Name="tbl_Order" EntityType="Self.tbl_Order" />
+          <EntitySet Name="tbl_OrderFactor" EntityType="Self.tbl_OrderFactor" />
+          <EntitySet Name="tbl_OrderKind" EntityType="Self.tbl_OrderKind" />
+          <EntitySet Name="tbl_SexType" EntityType="Self.tbl_SexType" />
+          <AssociationSet Name="FK_tbl_Factor_tbl_Customer" Association="Self.FK_tbl_Factor_tbl_Customer">
+            <End Role="tbl_Customer" EntitySet="tbl_Customer" />
+            <End Role="tbl_Factor" EntitySet="tbl_Factor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Employee_tbl_SexType" Association="Self.FK_tbl_Employee_tbl_SexType">
+            <End Role="tbl_SexType" EntitySet="tbl_SexType" />
+            <End Role="tbl_Employee" EntitySet="tbl_Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Factor_tbl_Employee" Association="Self.FK_tbl_Factor_tbl_Employee">
+            <End Role="tbl_Employee" EntitySet="tbl_Employee" />
+            <End Role="tbl_Factor" EntitySet="tbl_Factor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Factor_tbl_OrderKind" Association="Self.FK_tbl_Factor_tbl_OrderKind">
+            <End Role="tbl_OrderKind" EntitySet="tbl_OrderKind" />
+            <End Role="tbl_Factor" EntitySet="tbl_Factor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_OrderFactor_tbl_Factor" Association="Self.FK_tbl_OrderFactor_tbl_Factor">
+            <End Role="tbl_Factor" EntitySet="tbl_Factor" />
+            <End Role="tbl_OrderFactor" EntitySet="tbl_OrderFactor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Food_tbl_FoodStatus" Association="Self.FK_tbl_Food_tbl_FoodStatus">
+            <End Role="tbl_FoodStatus" EntitySet="tbl_FoodStatus" />
+            <End Role="tbl_Food" EntitySet="tbl_Food" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Food_tbl_FoodType" Association="Self.FK_tbl_Food_tbl_FoodType">
+            <End Role="tbl_FoodType" EntitySet="tbl_FoodType" />
+            <End Role="tbl_Food" EntitySet="tbl_Food" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Order_tbl_Food" Association="Self.FK_tbl_Order_tbl_Food">
+            <End Role="tbl_Food" EntitySet="tbl_Food" />
+            <End Role="tbl_Order" EntitySet="tbl_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_OrderFactor_tbl_Order" Association="Self.FK_tbl_OrderFactor_tbl_Order">
+            <End Role="tbl_Order" EntitySet="tbl_Order" />
+            <End Role="tbl_OrderFactor" EntitySet="tbl_OrderFactor" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RestaurantManagementModelStoreContainer" CdmEntityContainer="RestaurantManagementEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="RestaurantManagementModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Customer">
+            <EntityTypeMapping TypeName="RestaurantManagementModel.tbl_Customer">
+              <MappingFragment StoreEntitySet="tbl_Customer">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="CustomerLastName" ColumnName="CustomerLastName" />
+                <ScalarProperty Name="CustomerAddress" ColumnName="CustomerAddress" />
+                <ScalarProperty Name="CustomerRegisterDate" ColumnName="CustomerRegisterDate" />
+                <ScalarProperty Name="CustomerPhoneNumber" ColumnName="CustomerPhoneNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Employee">
+            <EntityTypeMapping TypeName="RestaurantManagementModel.tbl_Employee">
+              <MappingFragment StoreEntitySet="tbl_Employee">
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="NationalId" ColumnName="NationalId" />
+                <ScalarProperty Name="HomeAddress" ColumnName="HomeAddress" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SexID" ColumnName="SexID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Factor">
+            <EntityTypeMapping TypeName="RestaurantManagementModel.tbl_Factor">
+              <MappingFragment StoreEntitySet="tbl_Factor">
+                <ScalarProperty Name="PdfFileAddress" ColumnName="PdfFileAddress" />
+                <ScalarProperty Name="FactorID" ColumnName="FactorID" />
+                <ScalarProperty Name="SumFactor" ColumnName="SumFactor" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="tax" ColumnName="tax" />
+                <ScalarProperty Name="OrderKindID" ColumnName="OrderKindID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Food">
+            <EntityTypeMapping TypeName="RestaurantManagementModel.tbl_Food">
+              <MappingFragment StoreEntitySet="tbl_Food">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="FoodID" ColumnName="FoodID" />
+                <ScalarProperty Name="FoodStatusID" ColumnName="FoodStatusID" />
+                <ScalarProperty Name="FoodTypeID" ColumnName="FoodTypeID" />
+                <ScalarProperty Name="FoodText" ColumnName="FoodText" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_FoodStatus">
+            <EntityTypeMapping TypeName="RestaurantManagementModel.tbl_FoodStatus">
+              <MappingFragment StoreEntitySet="tbl_FoodStatus">
+                <ScalarProperty Name="FoodStatusID" ColumnName="FoodStatusID" />
+                <ScalarProperty Name="FoodStausText" ColumnName="FoodStausText" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_FoodType">
+            <EntityTypeMapping TypeName="RestaurantManagementModel.tbl_FoodType">
+              <MappingFragment StoreEntitySet="tbl_FoodType">
+                <ScalarProperty Name="FoodTypeID" ColumnName="FoodTypeID" />
+                <ScalarProperty Name="FoodTypeText" ColumnName="FoodTypeText" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Order">
+            <EntityTypeMapping TypeName="RestaurantManagementModel.tbl_Order">
+              <MappingFragment StoreEntitySet="tbl_Order">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="FoodID" ColumnName="FoodID" />
+                <ScalarProperty Name="NumberFoodOrder" ColumnName="NumberFoodOrder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_OrderFactor">
+            <EntityTypeMapping TypeName="RestaurantManagementModel.tbl_OrderFactor">
+              <MappingFragment StoreEntitySet="tbl_OrderFactor">
+                <ScalarProperty Name="OrderFactorID" ColumnName="OrderFactorID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="FactorID" ColumnName="FactorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_OrderKind">
+            <EntityTypeMapping TypeName="RestaurantManagementModel.tbl_OrderKind">
+              <MappingFragment StoreEntitySet="tbl_OrderKind">
+                <ScalarProperty Name="OrderKindID" ColumnName="OrderKindID" />
+                <ScalarProperty Name="OrderKindText" ColumnName="OrderKindText" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_SexType">
+            <EntityTypeMapping TypeName="RestaurantManagementModel.tbl_SexType">
+              <MappingFragment StoreEntitySet="tbl_SexType">
+                <ScalarProperty Name="SexID" ColumnName="SexID" />
+                <ScalarProperty Name="SexText" ColumnName="SexText" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

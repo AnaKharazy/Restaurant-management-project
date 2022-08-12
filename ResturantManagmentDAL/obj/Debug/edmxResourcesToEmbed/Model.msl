@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RestaurantManagementModelStoreContainer" CdmEntityContainer="RestaurantManagementEntities">
+    <EntitySetMapping Name="tbl_Customer">
+      <EntityTypeMapping TypeName="RestaurantManagementModel.tbl_Customer">
+        <MappingFragment StoreEntitySet="tbl_Customer">
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="CustomerLastName" ColumnName="CustomerLastName" />
+          <ScalarProperty Name="CustomerAddress" ColumnName="CustomerAddress" />
+          <ScalarProperty Name="CustomerRegisterDate" ColumnName="CustomerRegisterDate" />
+          <ScalarProperty Name="CustomerPhoneNumber" ColumnName="CustomerPhoneNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Employee">
+      <EntityTypeMapping TypeName="RestaurantManagementModel.tbl_Employee">
+        <MappingFragment StoreEntitySet="tbl_Employee">
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="NationalId" ColumnName="NationalId" />
+          <ScalarProperty Name="HomeAddress" ColumnName="HomeAddress" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="SexID" ColumnName="SexID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Factor">
+      <EntityTypeMapping TypeName="RestaurantManagementModel.tbl_Factor">
+        <MappingFragment StoreEntitySet="tbl_Factor">
+          <ScalarProperty Name="OrderKindID" ColumnName="OrderKindID" />
+          <ScalarProperty Name="FactorID" ColumnName="FactorID" />
+          <ScalarProperty Name="SumFactor" ColumnName="SumFactor" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="tax" ColumnName="tax" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Food">
+      <EntityTypeMapping TypeName="RestaurantManagementModel.tbl_Food">
+        <MappingFragment StoreEntitySet="tbl_Food">
+          <ScalarProperty Name="FoodID" ColumnName="FoodID" />
+          <ScalarProperty Name="FoodStatusID" ColumnName="FoodStatusID" />
+          <ScalarProperty Name="FoodTypeID" ColumnName="FoodTypeID" />
+          <ScalarProperty Name="FoodText" ColumnName="FoodText" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_FoodStatus">
+      <EntityTypeMapping TypeName="RestaurantManagementModel.tbl_FoodStatus">
+        <MappingFragment StoreEntitySet="tbl_FoodStatus">
+          <ScalarProperty Name="FoodStatusID" ColumnName="FoodStatusID" />
+          <ScalarProperty Name="FoodStausText" ColumnName="FoodStausText" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_FoodType">
+      <EntityTypeMapping TypeName="RestaurantManagementModel.tbl_FoodType">
+        <MappingFragment StoreEntitySet="tbl_FoodType">
+          <ScalarProperty Name="FoodTypeID" ColumnName="FoodTypeID" />
+          <ScalarProperty Name="FoodTypeText" ColumnName="FoodTypeText" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Order">
+      <EntityTypeMapping TypeName="RestaurantManagementModel.tbl_Order">
+        <MappingFragment StoreEntitySet="tbl_Order">
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="FoodID" ColumnName="FoodID" />
+          <ScalarProperty Name="NumberFoodOrder" ColumnName="NumberFoodOrder" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_OrderFactor">
+      <EntityTypeMapping TypeName="RestaurantManagementModel.tbl_OrderFactor">
+        <MappingFragment StoreEntitySet="tbl_OrderFactor">
+          <ScalarProperty Name="OrderFactorID" ColumnName="OrderFactorID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="FactorID" ColumnName="FactorID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_OrderKind">
+      <EntityTypeMapping TypeName="RestaurantManagementModel.tbl_OrderKind">
+        <MappingFragment StoreEntitySet="tbl_OrderKind">
+          <ScalarProperty Name="OrderKindID" ColumnName="OrderKindID" />
+          <ScalarProperty Name="OrderKindText" ColumnName="OrderKindText" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_SexType">
+      <EntityTypeMapping TypeName="RestaurantManagementModel.tbl_SexType">
+        <MappingFragment StoreEntitySet="tbl_SexType">
+          <ScalarProperty Name="SexID" ColumnName="SexID" />
+          <ScalarProperty Name="SexText" ColumnName="SexText" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

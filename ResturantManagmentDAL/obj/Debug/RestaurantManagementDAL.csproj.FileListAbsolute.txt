@@ -1,0 +1,12 @@
+C:\Users\ASUS\source\repos\ResturantManagment\ResturantManagmentDAL\bin\Debug\ResturantManagmentDAL.dll
+C:\Users\ASUS\source\repos\ResturantManagment\ResturantManagmentDAL\bin\Debug\ResturantManagmentDAL.pdb
+C:\Users\ASUS\source\repos\ResturantManagment\ResturantManagmentDAL\obj\Debug\RestaurantManagementDAL.csproj.AssemblyReference.cache
+C:\Users\ASUS\source\repos\ResturantManagment\ResturantManagmentDAL\obj\Debug\RestaurantManagementDAL.csproj.CoreCompileInputs.cache
+C:\Users\ASUS\source\repos\ResturantManagment\ResturantManagmentDAL\obj\Debug\ResturantManagmentDAL.dll
+C:\Users\ASUS\source\repos\ResturantManagment\ResturantManagmentDAL\obj\Debug\ResturantManagmentDAL.pdb
+C:\Users\ASUS\source\repos\ResturantManagment\ResturantManagmentDAL\bin\Debug\ResturantManagmentDAL.dll.config
+C:\Users\ASUS\source\repos\ResturantManagment\ResturantManagmentDAL\bin\Debug\EntityFramework.dll
+C:\Users\ASUS\source\repos\ResturantManagment\ResturantManagmentDAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\ASUS\source\repos\ResturantManagment\ResturantManagmentDAL\bin\Debug\EntityFramework.xml
+C:\Users\ASUS\source\repos\ResturantManagment\ResturantManagmentDAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\ASUS\source\repos\ResturantManagment\ResturantManagmentDAL\obj\Debug\RestaurantManagementDAL.csproj.CopyComplete
